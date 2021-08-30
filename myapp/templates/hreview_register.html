@@ -1,0 +1,33 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<div class="con">
+    <h2 class="title">Register New Post</h2>
+    <hr class="line">
+    <form action="{%url 'hreview_create'%}" method="post" enctype="multipart/form-data" class="register-form">
+        {%csrf_token%}
+        <table>
+            <tr>
+                <td>병원명</td>
+                <td><input type="text" name="hospital"></td>
+            </tr>
+            <tr>
+                <td>작성자</td>
+                <td><input type="text" name="nickname"></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea name="body" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <td>사진</td>
+                <td><input type="file" name="image"></td>
+            </tr>
+           <tr>
+               <td><button type="submit">등록</button></td>
+           </tr> 
+        </table>
+    </form>
+</div>
+
+{% endblock %}

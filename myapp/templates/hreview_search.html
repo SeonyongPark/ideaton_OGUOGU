@@ -1,0 +1,34 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<div class="con">
+    <form action="{%url 'search_hospital'%}" method="GET">
+        {%csrf_token%}
+        <input type="search" class="search" name="q" value="{{q}}">
+        <button type="submit" class="search-btn">Search</button>
+    </form>
+
+    <hr class='line'>
+    <!--선긋기-->
+    <button>
+        <a href="{%url 'hreview_register' %}">병원 리뷰 등록</a>
+    </button>
+    <div class="hreviewArticleContainer">
+        {%if not hsearch%}
+        <h1>검색 결과가 없습니다.</h1>
+        {%else%}
+        {%for search in hsearch%}
+        <article class="hreviewArticle">
+            <a href="{%url 'hreview_detail' search.id%}">
+                <p><img src="{{search.image.url}}" alt=""></p>
+                <h3>{{search.hospital}}</h3>
+                <h5>{{search.nickname}}</h5>
+                <h5>{{search.date}}</h5>
+            </a>
+        </article>
+        {%endfor%}
+        {%endif%}
+    </div>
+</div>
+{% endblock %}

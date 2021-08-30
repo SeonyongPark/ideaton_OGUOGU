@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'ideaton.css' %}">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav>
+
+    <div class='navbar'>
+      <span class="title"><a href="{% url 'home' %}">오구오구</a></span>
+      <span class="menu">
+        <a href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        <a href="{% url 'search_page' %}">질병검색</a>
+        <a href="http://127.0.0.1:8000/chat/">개인상담</a>
+        <a href="{% url 'hospital_review' %}">병원리뷰</a>
+        <a href="{% url 'medicine_review' %}">의약품리뷰</a>
+        {% if not user.is_authenticated %}
+        <a href="{% url 'login' %}">Login</a>
+        {% else %}
+        <a href="{% url 'logout' %}">Logout</a>
+        {% endif %}
+      </span>
+
+    </div>
+  </nav>
+
+  {% block content %}{% endblock %}
+</body>
+
+</html>

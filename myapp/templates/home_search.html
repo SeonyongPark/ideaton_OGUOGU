@@ -1,0 +1,43 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<div id="container">
+    <aside>
+        <ul class="asidea">
+            <form action="{%url 'search_home'%}" method="GET">
+                <li><button name="link" value="강아지">강아지</button></li>
+                <li><button name="link" value="고양이">고양이</button></li>
+                <li><button name="link" value="반려동물용품">반려동물용품</button></li>
+                <li><button name="link" value="질병정보">질병정보</button></li>
+                <li><button name="link" value="꿀팁">꿀팁</button></li>
+            </form>
+        </ul>
+    </aside>
+    <main>
+        <div class="buttonarea">
+            <button type="button" class="blogbutton" onclick="location.href= '{% url 'news_register' %}'">글
+                추가하기</button>
+        </div>
+        <span class="blogsearch">
+            {%if not psearch%}
+            <h1>정보를 공유해주세요!</h1>
+            {%else%}
+            {%for search in psearch%}
+            <article class="blogArticle">
+                <a href="{%url 'news_detail' search.id%}">
+                    <p><img src="{{search.image.url}}" alt=""></p>
+                    <h2>{{search.title}}</h2>
+                    <div>
+                        {{search.summary}}
+                        <h5>{{search.writer}}</h5>
+                        <h5>{{search.date}}</h5>
+                    </div>
+                </a>
+            </article>
+            {%endfor%}
+            {%endif%}
+        </span>
+    </main>
+</div>
+{% endblock %}

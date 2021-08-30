@@ -1,0 +1,78 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!-- chat/templates/chat/room.html -->
+
+<div class="con">
+    <div class="room">
+        <textarea id="chat-log" cols="100" rows="20">
+        </textarea><br>
+        <input id="chat-message-input" type="text" size="100">
+        <button id="chat-message-submit" type="submit">Send</button>
+        {{ room_name|json_script:"room-name" }}
+        <script>
+            const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    
+            const chatSocket = new WebSocket(
+                'ws://'
+                + window.location.host
+                + '/ws/chat/'
+                + roomName
+                + '/'
+            );
+    
+            chatSocket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+                document.querySelector('#chat-log').value += (data.message + '\n');
+            };
+    
+            chatSocket.onclose = function(e) {
+                console.error('Chat socket closed unexpectedly');
+            };
+    
+            document.querySelector('#chat-message-input').focus();
+            document.querySelector('#chat-message-input').onkeyup = function(e) {
+                if (e.keyCode === 13) {  // enter, return
+                    document.querySelector('#chat-message-submit').click();
+                }
+            };
+            let today = new Date(); 
+            let year = today.getFullYear(); // 년도
+            let month = today.getMonth() + 1;  // 월
+            let date = today.getDate();  // 날짜
+            let day = today.getDay();  // 요일
+            let hours = today.getHours(); // 시
+            let minutes = today.getMinutes();  // 분
+            let seconds = today.getSeconds();  // 초
+    
+            if(day == 1)
+            {
+                day = "월"
+            }else if (day == 2) {
+                day = "화"
+            }else if (day == 3) {
+                day = "수"
+            }else if (day == 4) {
+                day = "목"
+            }else if (day == 5) {
+                day = "금"
+            }
+            else if (day == 6) {
+                day = "토"
+            }else{
+                day = "일"
+            }
+            document.getElementsByTagName('textarea')[0].innerHTML = String(year)+"년 "+String(month)+"월 "+String(date)+"일 "+day+"요일"+"\n\n";
+            document.querySelector('#chat-message-submit').onclick = function(e) {
+                const messageInputDom = document.querySelector('#chat-message-input');
+                const message = "("+String(hours) + ":" + String(minutes) + ") " +  "{{request.user.username}} : " + messageInputDom.value;
+                chatSocket.send(JSON.stringify({
+                    'message': message
+                }));
+                messageInputDom.value = '';
+            };
+        </script>
+    </div>
+</div>
+{% endblock %}

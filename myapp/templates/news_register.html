@@ -1,0 +1,46 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<div class="con">
+    <h2 class="title">Register New Post</h2>
+    <hr class="line">
+    <form action="{%url 'news_create'%}" method="post" enctype="multipart/form-data" class="register-form">
+        {%csrf_token%}
+        <table>
+            <tr>
+                <td>제목</td>
+                <td><input type="text" name="title"></td>
+            </tr>
+            <tr>
+                <td>작성자</td>
+                <td><input type="text" name="writer"></td>
+            </tr>
+            <tr>
+                <td>분류</td>
+                <td>
+                    카테고리 <select name='link'>
+                        <option value="강아지">강아지</option>
+                        <option value="고양이">고양이</option>
+                        <option value="반려동물용품">반려동물용품</option>
+                        <option value="질병정보">질병정보</option>
+                        <option value="꿀팁">꿀팁</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea name="body" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <td>사진</td>
+                <td><input type="file" name="image"></td>
+            </tr>
+           <tr>
+               <td><button type="submit">등록</button></td>
+           </tr> 
+        </table>
+        
+    </form>
+</div>
+
+
+{% endblock %}

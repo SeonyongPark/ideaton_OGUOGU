@@ -1,0 +1,43 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<div id="container">
+    <aside>
+        <ul class="asidea">
+            <form action="{%url 'search_home'%}" method="GET">
+            
+                <li><button name="link" value="강아지">강아지</button></li>
+                <li><button name="link" value="고양이">고양이</button></li>
+                <li><button name="link" value="반려동물용품">반려동물용품</button></li>
+                <li><button name="link" value="질병정보">질병정보</button></li>
+                <li><button name="link" value="꿀팁">꿀팁</button></li>
+            
+            </form>
+        </ul>
+    </aside>
+    <main>
+        <div class="buttonarea">
+            <button type="button" class="blogbutton" onclick="location.href= '{% url 'news_register' %}'">글
+                추가하기</button>
+        </div>
+        <span>
+            {%for fnews in news%}
+            <article class="blogArticle">
+                <a href="{%url 'news_detail' fnews.id%}">
+                    <p><img src="{{fnews.image.url}}" alt=""></p>
+                    <h2>{{fnews.title}}</h2>
+                    <h5>{{fnews.link}}</h5>
+                    <div>
+                        {{fnews.summary}}
+                    </div>
+                    <h5>{{fnews.writer}}</h5>
+                    <h5>{{fnews.date}}</h5>
+                </a>
+            </article>
+            {%endfor%}
+        </span>
+    </main>
+</div>
+
+{% endblock %}

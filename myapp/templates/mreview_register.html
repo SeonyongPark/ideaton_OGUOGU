@@ -1,0 +1,46 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<div class="con">
+    <h2 class="title">Register New Post</h2>
+    <hr class="line">
+    <form action="{%url 'mreview_create'%}" method="post" enctype="multipart/form-data" class="register-form">
+        {%csrf_token%}
+        <table>
+            <tr>
+                <td>의약품명</td>
+                <td><input type="text" name="medicine"></td>
+            </tr>
+            <tr>
+                <td>작성자</td>
+                <td><input type="text" name="nickname"></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td><textarea name="body" id="" cols="30" rows="10"></textarea></td>
+            </tr>
+            <tr>
+                <td>신체부위</td>
+                <td>
+                    <select name="part" id="">
+                        <option value="eye">눈</option>
+                        <option value="arm">팔</option>
+                        <option value="leg">다리</option>
+                        <option value="tail">꼬리</option>
+                        <option value="tail">목</option>
+                        <option value="tail">생식기</option>
+                        <option value="tail">허리</option>
+            </tr>
+            <tr>
+                <td>사진</td>
+                <td><input type="file" name="image"></td>
+            </tr>
+            
+           <tr>
+               <td><button type="submit">등록</button></td>
+           </tr> 
+        </table>
+    </form>
+</div>
+
+{% endblock %}

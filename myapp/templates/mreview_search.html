@@ -1,0 +1,92 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<div class="con">
+    <form action="{%url 'search_medicine'%}" method="GET">
+        {%csrf_token%}
+        <input type="search" class="search" name="q" value="{{q}}">
+        <button type="submit" class="search-btn">Search</button>
+    </form>
+
+    <hr class='line'>
+    <!--선긋기-->
+    <button>
+        <a href="{%url 'mreview_register' %}">약품 리뷰 등록</a>
+    </button>
+    <div class="choose">
+        <div class="column">
+            <form action="{%url 'button_search_medicine'%}" method="GET">
+                {%csrf_token%}
+                <button value="품종" name="part" class="deepblue">품종</button>
+            </form>
+        </div>
+        <div class="column">
+            <form action="{%url 'button_search_medicine'%}" method="GET">
+                {%csrf_token%}
+                <button value="눈" name="part" class="deepblue">눈</button>
+            </form>
+        </div>
+        <div class="column">
+            <form action="{%url 'button_search_medicine'%}" method="GET">
+                {%csrf_token%}
+                <button value="기관지" name="part" class="deepblue">기관지</button>
+            </form>
+        </div>
+        <div class="column">
+            <form action="{%url 'button_search_medicine'%}" method="GET">
+                {%csrf_token%}
+                <button value="배변" name="part" class="deepblue">배변</button>
+            </form>
+        </div>
+        <div class="column">
+            <form action="{%url 'button_search_medicine'%}" method="GET">
+                {%csrf_token%}
+                <button value="코" name="part" class="deepblue">코</button>
+            </form>
+        </div>
+        <div class="column">
+            <form action="{%url 'button_search_medicine'%}" method="GET">
+                {%csrf_token%}
+                <button value="상태" name="part" class="deepblue">상태</button>
+            </form>
+        </div>
+        <div class="column">
+            <form action="{%url 'button_search_medicine'%}" method="GET">
+                {%csrf_token%}
+                <button value="신경/근육" name="part" class="deepblue">신경/근육</button>
+            </form>
+        </div>
+        <div class="column">
+            <form action="{%url 'button_search_medicine'%}" method="GET">
+                {%csrf_token%}
+                <button value="상처" name="part" class="deepblue">상처</button>
+            </form>
+        </div>
+        <div class="column">
+            <form action="{%url 'button_search_medicine'%}" method="GET">
+                {%csrf_token%}
+                <button value="기타" name="part" class="deepblue">기타</button>
+            </form>
+        </div>
+    </div>
+    <div class="hreviewArticleContainer">
+        {%if not msearch%}
+        <br>
+        <h2>검색 결과가 없습니다.</h2>
+        {%else%}
+        {%for search in msearch%}
+        <article class="hreviewArticle">
+            <a href="{%url 'mreview_detail' search.id%}">
+                <p><img src="{{search.image.url}}" alt=""></p>
+                <h3>{{search.medicine}}</h3>
+                <h5>{{search.nickname}}</h5>
+                <h5>{{search.part}}</h5>
+                <h5>{{search.date}}</h5>
+            </a>
+        </article>
+        {%endfor%}
+        {%endif%}
+    </div>
+</div>
+{% endblock %}

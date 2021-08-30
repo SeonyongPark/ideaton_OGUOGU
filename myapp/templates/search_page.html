@@ -1,0 +1,107 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<div class="con">
+    <form action="{% url 'search_page' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" class="search" name="search_text">
+        <input type="submit" value="검색" class="search-btn">
+    </form>
+    <div><h2>주요증상 예시</h2></div>
+    <div class="choose">
+        <div class="column">
+            눈
+            <button class="deepblue">눈물흘림</button>
+            <button class="cloudy">충혈</button>
+            <button class="navy">안구건조</button>
+        </div>
+        <div class="column">
+            기관지
+            <button class="deepblue">과호흡</button>
+            <button class="cloudy">호흡곤란</button>
+            <button class="navy">비정상<br>호흡음</button>
+        </div>
+        <div class="column">
+            배변
+            <button class="deepblue">혈변</button>
+            <button class="cloudy">설사</button>
+            <button class="navy">변비</button>
+        </div>
+        <div class="column">
+            코
+            <button class="deepblue">비출혈</button>
+            <button class="cloudy">코고는<br>소리</button>
+            <button class="navy">코의 종창</button>
+        </div>
+        <div class="column">
+            상태
+            <button class="deepblue">무기력</button>
+            <button class="cloudy">침울</button>
+            <button class="navy">졸림</button>
+        </div>
+        <div class="column">
+            신경/근육
+            <button class="deepblue">경련</button>
+            <button class="cloudy">마비</button>
+            <button class="navy">실신</button>
+        </div>
+        <div class="column">
+            기타
+            <button class="deepblue">곤두선 털</button>
+            <button class="cloudy">체중감소</button>
+            <button class="navy">탈모</button>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <!-- <div class="result">
+        해당 결과가 없습니다
+    </div>
+    
+    <div class="new">
+        최근 리뷰
+    </div>
+    <div class="new-review">
+        <div class="reivew-con"></div>
+        <div class="reivew-con"></div>
+        <div class="reivew-con"></div>
+    </div> -->
+    <div class="search-result">
+        <h2>검색 결과</h2>
+    </div>
+    {% for search_page_text in search_page %}
+    <h1>{{search_page_text.name}}</h1>
+    <br>
+    <br>
+    <div class="result-table">
+        <table border="1">
+            <tr>
+                <td class="result-row"><h4>증상</h4></td>
+                <td style="white-space: pre-wrap;">{{search_page_text.symptom}}</td>
+            </tr>
+            <tr>
+                <td><h4>원인</h4></td>
+                <td style="white-space: pre-wrap;">{{search_page_text.cause}}</td>
+            </tr>
+            <tr>
+                <td><h4>치료</h4></td>
+                <td style="white-space: pre-wrap;">{{search_page_text.treat}}</td>
+            </tr>
+            <tr>
+                <td><h4>예방</h4></td>
+                <td style="white-space: pre-wrap;">{{search_page_text.prevent}}</td>
+            </tr>
+            <tr>
+                <td><h4>보호자 주의사항</h4></td>
+                <td style="white-space: pre-wrap;">{{search_page_text.advice}}</td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <br>
+    {% endfor %}
+    
+</div>
+
+{% endblock %}

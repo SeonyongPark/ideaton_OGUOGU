@@ -1,0 +1,30 @@
+<!--login.html-->
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<div class="con">
+    <div class="mar">
+    <h1>login</h1>
+    <form method="post" action="{% url 'login' %}" class="register-form">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name = "Username"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name = "Password"></td>
+            </tr>
+            <tr>
+                <td><div class="pass">비밀번호를 잊으셨나요?</div></td>
+                <td><input type="submit" value="로그인"></td>
+            </tr>
+        </table>
+        
+    </form>
+    </div>
+    
+</div>
+
+{% endblock %}

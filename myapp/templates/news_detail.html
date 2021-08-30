@@ -1,0 +1,28 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<div class="detailHeader">
+    <h1>{{dnews.title}}</h1>
+</div>
+<hr class='line'>
+<!--선긋기-->
+<div class="detailContent">
+    <div>
+        <img src="{{dnews.image.url}}" alt="">
+
+        <table class="detail-con">
+            <tr>
+                <td><h4>작성자&nbsp&nbsp</h4></td>
+                <td>{{dnews.writer}}</td>
+            </tr>
+            <tr>
+                <td><h4>날짜</h4></td>
+                <td>{{dnews.date}}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><br>{{dnews.body}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

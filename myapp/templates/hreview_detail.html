@@ -1,0 +1,34 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<div class="detailHeader">
+    <h1>{{hreview.hospital}}</h1>
+</div>
+<hr class='line'>
+<!--선긋기-->
+<div class="detailContent">
+    <div>
+        <img src="{{hreview.image.url}}" alt="">
+        <!--프로필 사진-->
+        <table class="detail-con">
+            <tr>
+                <td><h4>작성자&nbsp&nbsp</h4></td>
+                <td>{{hreview.nickname}}</td>
+            </tr>
+            <tr>
+                <td><h4>날짜</h4></td>
+                <td>{{hreview.date}}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><br>{{hreview.body}}</td>
+            </tr>
+        </table>
+
+    </div>
+    
+</div>
+
+
+
+{% endblock %}
